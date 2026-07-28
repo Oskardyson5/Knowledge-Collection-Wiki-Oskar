@@ -34,3 +34,9 @@ body{
     background-color: #D4AF37;
     color: black;
 }
+
+.logo {
+    width: 70px;
+    height: auto;
+    margin-left: auto;
+}
