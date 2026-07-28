@@ -24,6 +24,7 @@ body{
 .nav-button {
  color: #D4AF37;
  text-decoration: none;
+ border-radius: 8px;
  cursor: pointer;
  transition: 0,2s;
 }
