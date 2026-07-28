@@ -1,4 +1,6 @@
-
+body{
+    font-family: "Inter", sans-serif;
+}
 
 
 .navbar {
@@ -15,6 +17,8 @@
 
  position: sticky;
  top: 0;
+
+ padding: 0 20px;
 }
 
 .nav-button {
