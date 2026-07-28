@@ -15,7 +15,7 @@ body{
 .title::after {
     content: "";
     display: block;
-    width: 180px;
+    width: 270px;
     height: 4px;
     background-color: #D4AF37;
     margin: 15px auto 0;
