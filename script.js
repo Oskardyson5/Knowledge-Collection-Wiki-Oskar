@@ -4,9 +4,11 @@ const createMenu = document.getElementById("create-menu");
 newButton.addEventListener("click", function() {
 
     createMenu.innerHTML = `
-        <h3>Was möchtest du erstellen?</h3>
-        <button>📁 Ordner</button>
-        <button>📄 Eintrag</button>
+      <div class="create-window">
+         <h3>Was möchtest du erstellen?</h3>
+         <button>📁 Ordner</button>
+         <button>📄 Eintrag</button>
+        </div>
     `;
 
 });
