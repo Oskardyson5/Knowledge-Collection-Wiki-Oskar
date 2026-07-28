@@ -24,4 +24,11 @@ body{
 .nav-button {
  color: #D4AF37;
  text-decoration: none;
+ cursor: pointer;
+ transition: 0,2s;
+}
+
+.nav-button:hover{
+    background-color: #D4AF37;
+    color: black;
 }
