@@ -41,19 +41,27 @@ body{
     margin-left: auto;
 }
 
-.choosebutton{
-    display:flex;
-    height:50px;
+.choosebutton {
+    display: flex;
+    height: 50px;
     background-color: white;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    margin: 15px 0;
+}
+
+.choosebutton a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 20px;
 
     color: black;
     text-decoration: none;
-    cursor: pointer;
-    transition: 0,2s;
+
+    transition: 0.2s;
 }
 
-.choosebutton:hover{
-    background-color:#D4AF37;
+.choosebutton:hover a {
+    background-color: #D4AF37;
     color: black;
 }
