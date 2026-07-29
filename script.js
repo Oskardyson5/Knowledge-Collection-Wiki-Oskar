@@ -22,6 +22,7 @@ const folders = [
     }
 ];
 
+
 const folderTitle = document.getElementById("folder-title")
 const folderTree = document.getElementById("folder-tree");
 
@@ -50,6 +51,7 @@ function showFolders(folderList, title = "", folderId = null) {
 
 }
 
+
 function findParent(folderList, id, parent = null){
 
     for(let folder of folderList){
@@ -76,7 +78,9 @@ function findParent(folderList, id, parent = null){
     return null;
 }
 
+
 showFolders(folders, "")
+
 
 folderTree.addEventListener("click", function(event){
 
@@ -105,8 +109,10 @@ showFolders(
 
 });
 
+
 const newButton = document.getElementById("newButton");
 const createMenu = document.getElementById("create-menu");
+
 
 newButton.addEventListener("click", function() {
 
@@ -120,6 +126,7 @@ newButton.addEventListener("click", function() {
 
 });
 
+
 document.addEventListener("click", function(event) {
 
     if (!createMenu.contains(event.target) && event.target !== newButton) {
@@ -127,6 +134,7 @@ document.addEventListener("click", function(event) {
     }
 
 });
+
 
 window.addEventListener("popstate", function(event){
 
@@ -163,4 +171,13 @@ window.addEventListener("popstate", function(event){
 
     }
 
+});
+
+
+const nextButton = document.getElementById("nextButton");
+const folderNameInput = document.getElementbyId("NewfolderName");
+
+nextButton.addEventListener("click", () => {
+    const folderName = folderNameInput.value;
+    alert(folderName);
 });
