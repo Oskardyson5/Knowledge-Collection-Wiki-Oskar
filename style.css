@@ -48,6 +48,7 @@ body{
 .nav-button {
  background-color: black;
  color: #D4AF37;
+ font-size: 15px;
  padding: 10px 20px;
  text-decoration: none;
  border-radius: 8px;
@@ -134,4 +135,13 @@ body{
     font-size: 42px;
     font-weight: 700;
     margin: 40px 0 20px 0;
+}
+
+.Eingabefeld{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    cursor:text;
+    font-size: 25px;
+    color: grey;
 }

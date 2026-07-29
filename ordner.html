@@ -16,14 +16,15 @@
 <body>
     <div id="nameStep">
      <h1>Neuen Ordner erstellen</h1>
-     <p class="subtitle">Wie soll der Ordner heißen?</p>
-     <input type=""text" id="NewfolderName" placeholder="Ordnername">
+     <p>Wie soll der Ordner heißen?</p>
+     <input class="Eingabefeld" type="text" id="NewfolderName" placeholder="Ordnername">
      <button class="choosebutton" id="nextButton"><h2>Weiter</h2></button>
     </div>
 
     <div id="pathStep" style="display:none;">
         <h1>Speicherort auswählen</h1>
-        <p class="subtitle">Wähle den Parent-ordner deines Ordners.</p>
+        <p>Wähle den Parent-ordner deines Ordners.</p>
+        <div id="folderExplorer"></div>
     </div>
     <script src="script.js"></script>
 </body>

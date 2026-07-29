@@ -27,14 +27,15 @@ const folderTitle = document.getElementById("folder-title")
 const folderTree = document.getElementById("folder-tree");
 
 let currentFolders;
+let newFolderName = "";
+let selectedFolder = null;
+let path = [];
 
 
 function showFolders(folderList, title = "", folderId = null) {
 
     currentFolders = folderList;
-
     folderTitle.innerHTML = title;
-
     folderTree.innerHTML = "";
 
     folderList.forEach(function(folder){
@@ -182,6 +183,21 @@ const folderNameInput = document.getElementbyId("NewfolderName");
 nextButton.addEventListener("click", () => {
     const folderName = folderNameInput.value;
 
+    newFolderName=folderName
+
     nameStep.style.display = "none";
     pathStep.style.display = "block";
+
+    showFolders(folders);
+});
+
+folderList.forEach(folder => {
+    const folderButton = document.createElement("button");
+    folderButton.textContent = "📁 " + folder.name;
+
+    folderButton.addEventListener("click", () => {
+        showFolders(folder.children);
+    });
+
+    folderExplorer.appendChild(folderButton);
 });
