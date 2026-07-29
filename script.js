@@ -174,10 +174,14 @@ window.addEventListener("popstate", function(event){
 });
 
 
+const nameStep = document.getElementById("nameStep");
+const pathStep = document.getElementById("pathStep");
 const nextButton = document.getElementById("nextButton");
 const folderNameInput = document.getElementbyId("NewfolderName");
 
 nextButton.addEventListener("click", () => {
     const folderName = folderNameInput.value;
-    alert(folderName);
+
+    nameStep.style.display = "none";
+    pathStep.style.display = "block";
 });
