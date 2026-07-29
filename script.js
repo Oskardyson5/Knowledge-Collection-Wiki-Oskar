@@ -22,13 +22,17 @@ const folders = [
     }
 ];
 
+const folderTitle = document.getElementById("folder-title")
 const folderTree = document.getElementById("folder-tree");
 
 let currentFolders;
 
 
-function showFolders(folderList){
+function showFolders(folderList, title = "", folderId = null) {
+
     currentFolders = folderList;
+
+    folderTitle.innerHTML = title;
 
     folderTree.innerHTML = "";
 
@@ -51,22 +55,28 @@ function findParent(folderList, id, parent = null){
     for(let folder of folderList){
 
         if(folder.id === id){
-            folder.parent = parent;
-            return {parent};
+            return parent;
         }
 
         if(folder.children.length > 0){
-           const result = findParent(folder.children, id, folder);
 
-           if(result){
-            return result;
-           }
+            const result = findParent(
+                folder.children,
+                id,
+                folder
+            );
+
+            if(result){
+                return result;
+            }
+
         }
     }
+
     return null;
 }
 
-showFolders(folders)
+showFolders(folders, "")
 
 folderTree.addEventListener("click", function(event){
 
@@ -79,12 +89,18 @@ folderTree.addEventListener("click", function(event){
     const folder = currentFolders.find(f => f.id === id);
 
     if(folder && folder.children.length > 0){
-        history.pushState(
-            {folderId: folder.id},
-            "",
-            ""
-        );
-        showFolders(folder.children);
+        history.pushState({
+         folderId: folder.id
+        },
+        "",
+        ""
+);
+
+showFolders(
+    folder.children,
+    folder.name,
+    folder.id
+);
     }
 
 });
@@ -116,16 +132,35 @@ window.addEventListener("popstate", function(event){
 
     if(event.state){
 
-        const result = findParent(folders, event.state.folderId);
+        const parent = findParent(
+            folders,
+            event.state.folderId
+        );
 
-        if(result){
-            if(result){
-                showFolders(result.parent.children);
-            } else {
-                showFolders(folders);
-            }
+        if(parent){
+
+            showFolders(
+                parent.children,
+                parent.name,
+                parent.id
+            );
+
+        } else {
+
+            showFolders(
+                folders,
+                ""
+            );
+
         }
+
     } else {
-        showFolders(folders);
+
+        showFolders(
+            folders,
+            ""
+        );
+
     }
+
 });

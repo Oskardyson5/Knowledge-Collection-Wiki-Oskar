@@ -46,11 +46,16 @@ body{
 }
 
 .nav-button {
+ background-color: black;
  color: #D4AF37;
+ padding: 10px 20px;
  text-decoration: none;
  border-radius: 8px;
  cursor: pointer;
  transition: 0,2s;
+ display: flex;
+ align-items: center;
+ border: none;
 }
 
 .nav-button:hover{
@@ -123,4 +128,10 @@ body{
 
 .create-button:hover {
     color: #D4AF37;
+}
+
+#folder-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 40px 0 20px 0;
 }
