@@ -70,9 +70,7 @@ body{
     background-color: white;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     margin: 15px 0;
-}
 
-.choosebutton{
     display: flex;
     align-items: center;
     width: 100%;
