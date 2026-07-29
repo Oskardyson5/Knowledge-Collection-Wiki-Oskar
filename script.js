@@ -6,8 +6,8 @@ newButton.addEventListener("click", function() {
     createMenu.innerHTML = `
       <div class="create-window">
          <h3>Was möchtest du erstellen?</h3>
-         <button>📁 Ordner</button>
-         <button>📄 Eintrag</button>
+         <a href="ordner.html" class="create-button">📁 Ordner</a>
+         <a href="artikel.html">📄 Eintrag</a>
         </div>
     `;
 
