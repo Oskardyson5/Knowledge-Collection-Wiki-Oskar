@@ -1,21 +1,48 @@
 const folders = [
-    "Privat",
-    "Schule",
-    "Studium"
+    {
+        id: 1,
+        name: "Privat",
+        children: [
+            {
+                id: 4,
+                name: "Haushalt",
+                children: []
+            }
+        ]
+    },
+    {
+        id: 2,
+        name: "Schule",
+        children: []
+    },
+    {
+        id: 3,
+        name: "Studium",
+        children: []
+    }
 ];
 
 const folderTree = document.getElementById("folder-tree");
 
-folders.forEach(function(foldername){
-    folderTree.innerHTML += `
-    <nav class="choosebutton">
-        <div>
-            <h2>📁 ${foldername}</h2>
-        </div>
-    </nav>
-`;
-})
+function showFolders(folderList){
 
+    folderTree.innerHTML = "";
+
+    folderList.forEach(function(folder){
+
+        folderTree.innerHTML += `
+            <nav class="choosebutton" data-id="${folder.id}">
+                <div>
+                    <h2>📁 ${folder.name}</h2>
+                </div>
+            </nav>
+        `;
+
+    });
+
+}
+
+showFolders(folders)
 
 const newButton = document.getElementById("newButton");
 const createMenu = document.getElementById("create-menu");
