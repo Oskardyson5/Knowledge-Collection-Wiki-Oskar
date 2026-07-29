@@ -24,7 +24,11 @@ const folders = [
 
 const folderTree = document.getElementById("folder-tree");
 
+let currentFolders;
+
+
 function showFolders(folderList){
+    currentFolders = folderList;
 
     folderTree.innerHTML = "";
 
@@ -42,7 +46,48 @@ function showFolders(folderList){
 
 }
 
+function findParent(folderList, id, parent = null){
+
+    for(let folder of folderList){
+
+        if(folder.id === id){
+            folder.parent = parent;
+            return {parent};
+        }
+
+        if(folder.children.length > 0){
+           const result = findParent(folder.children, id, folder);
+
+           if(result){
+            return result;
+           }
+        }
+    }
+    return null;
+}
+
 showFolders(folders)
+
+folderTree.addEventListener("click", function(event){
+
+    const button = event.target.closest(".choosebutton");
+
+    if(!button) return;
+
+    const id = Number(button.dataset.id);
+
+    const folder = currentFolders.find(f => f.id === id);
+
+    if(folder && folder.children.length > 0){
+        history.pushState(
+            {folderId: folder.id},
+            "",
+            ""
+        );
+        showFolders(folder.children);
+    }
+
+});
 
 const newButton = document.getElementById("newButton");
 const createMenu = document.getElementById("create-menu");
@@ -65,4 +110,22 @@ document.addEventListener("click", function(event) {
         createMenu.innerHTML = "";
     }
 
+});
+
+window.addEventListener("popstate", function(event){
+
+    if(event.state){
+
+        const result = findParent(folders, event.state.folderId);
+
+        if(result){
+            if(result){
+                showFolders(result.parent.children);
+            } else {
+                showFolders(folders);
+            }
+        }
+    } else {
+        showFolders(folders);
+    }
 });
