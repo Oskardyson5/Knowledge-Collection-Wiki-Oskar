@@ -6,13 +6,14 @@ const folders = [
 
 const folderTree = document.getElementById("folder-tree");
 
-foldeers.forEach(function(foldername){
-    folderTree.innerHTML +=
+folders.forEach(function(foldername){
+    folderTree.innerHTML += `
     <nav class="choosebutton">
         <div>
             <h2>📁 ${folderName}</h2>
         </div>
     </nav>
+`;
 })
 
 
