@@ -12,3 +12,11 @@ newButton.addEventListener("click", function() {
     `;
 
 });
+
+document.addEventListener("click", function(event) {
+
+    if (!createMenu.contains(event.target) && event.target !== newButton) {
+        createMenu.innerHTML = "";
+    }
+
+});
