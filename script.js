@@ -10,7 +10,7 @@ folders.forEach(function(foldername){
     folderTree.innerHTML += `
     <nav class="choosebutton">
         <div>
-            <h2>📁 ${folderName}</h2>
+            <h2>📁 ${foldername}</h2>
         </div>
     </nav>
 `;
