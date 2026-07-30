@@ -1,41 +1,90 @@
-function getToken(){
-    const token = localStorage.getItem("githubToken");
-    return token;
-}
+function getToken() {
 
-async function getFileSha() {
 
-    const token = getToken();
-
-    const response = await fetch(
-        "https://api.github.com/repos/oskardyson5/Knowledge-Collection-Wiki-Oskar/contents/data/folders.json",
-        {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Accept": "application/vnd.github+json"
-            }
-        }
+    const token = localStorage.getItem(
+        "githubToken"
     );
 
-    const data = await response.json();
-    return data.sha;
+
+    return token;
 
 }
 
-async function uploadFile(content, sha) {
+
+
+// SHA der Datei holen
+async function getFileSha() {
+
 
     const token = getToken();
 
+
     const response = await fetch(
+
         "https://api.github.com/repos/oskardyson5/Knowledge-Collection-Wiki-Oskar/contents/data/folders.json",
+
         {
-            method: "PUT",
 
             headers: {
+
                 "Authorization": `Bearer ${token}`,
+
+                "Accept": "application/vnd.github+json"
+
+            }
+
+        }
+
+    );
+
+
+
+    const data = await response.json();
+
+
+
+    console.log(
+        "SHA:",
+        data.sha
+    );
+
+
+
+    return data.sha;
+
+
+}
+
+
+
+
+// Datei hochladen
+async function uploadFile(content, sha) {
+
+
+    const token = getToken();
+
+
+
+    const response = await fetch(
+
+        "https://api.github.com/repos/oskardyson5/Knowledge-Collection-Wiki-Oskar/contents/data/folders.json",
+
+        {
+
+            method: "PUT",
+
+
+            headers: {
+
+                "Authorization": `Bearer ${token}`,
+
                 "Accept": "application/vnd.github+json",
+
                 "Content-Type": "application/json"
+
             },
+
 
             body: JSON.stringify({
 
@@ -50,28 +99,72 @@ async function uploadFile(content, sha) {
                 sha: sha
 
             })
+
         }
+
     );
+
 
 
     const data = await response.json();
+
+
+
+    console.log(
+        "Upload:",
+        data
+    );
+
+
+
     return data;
+
+
 }
 
-async function saveFolders() {
+
+
+
+// Hauptfunktion
+async function saveFolders(folderData) {
+
+
+    console.log(
+        "Speichere:",
+        folderData
+    );
+
+
 
     const json = JSON.stringify(
-        window.folders,
+
+        folderData,
+
         null,
+
         4
+
     );
+
 
 
     const sha = await getFileSha();
 
 
+
     await uploadFile(
+
         json,
+
         sha
+
     );
+
+
+
+    console.log(
+        "Speichern abgeschlossen!"
+    );
+
+
 }
