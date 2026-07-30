@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Privat",
+        "children": [
+            {
+                "id": 4,
+                "name": "Haushalt",
+                "children": []
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Schule",
+        "children": []
+    },
+    {
+        "id": 3,
+        "name": "Studium",
+        "children": []
+    }
+]

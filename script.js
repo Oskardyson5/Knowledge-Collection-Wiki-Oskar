@@ -1,41 +1,38 @@
-const folders = [
-    {
-        id: 1,
-        name: "Privat",
-        children: [
-            {
-                id: 4,
-                name: "Haushalt",
-                children: []
-            }
-        ]
-    },
-    {
-        id: 2,
-        name: "Schule",
-        children: []
-    },
-    {
-        id: 3,
-        name: "Studium",
-        children: []
-    }
-];
+let folders = [];
 
 const folderTitle = document.getElementById("folder-title");
 const folderTree = document.getElementById("folder-tree");
 
 let currentFolders;
-let newFolderName = "";
-let selectedFolder = null;
-let path = [];
+let selectedParent = null;
 
+
+// Ordner laden
+async function loadFolders() {
+
+    const response = await fetch("data/folders.json");
+
+    folders = await response.json();
+
+    showFolders(folders, "");
+}
+
+
+// Ordner anzeigen
 function showFolders(folderList, title = "", folderId = null) {
+
     currentFolders = folderList;
-    folderTitle.innerHTML = title;
+
+    if (folderTitle) {
+        folderTitle.innerHTML = title;
+    }
+
+    if (!folderTree) return;
+
     folderTree.innerHTML = "";
 
     folderList.forEach(function(folder) {
+
         folderTree.innerHTML += `
             <nav class="choosebutton" data-id="${folder.id}">
                 <div>
@@ -43,9 +40,12 @@ function showFolders(folderList, title = "", folderId = null) {
                 </div>
             </nav>
         `;
+
     });
 }
 
+
+// Parent suchen
 function findParent(folderList, id, parent = null) {
 
     for (let folder of folderList) {
@@ -53,6 +53,7 @@ function findParent(folderList, id, parent = null) {
         if (folder.id === id) {
             return parent;
         }
+
 
         if (folder.children.length > 0) {
 
@@ -62,32 +63,48 @@ function findParent(folderList, id, parent = null) {
                 folder
             );
 
+
             if (result) {
                 return result;
             }
+
         }
+
     }
 
     return null;
 }
 
-showFolders(folders, "");
+
+
+// Ordner anklicken
+if (folderTree) {
 
 folderTree.addEventListener("click", function(event) {
 
+
     const button = event.target.closest(".choosebutton");
+
 
     if (!button) return;
 
+
     const id = Number(button.dataset.id);
 
-    const folder = currentFolders.find(f => f.id === id);
+
+    const folder = currentFolders.find(
+        f => f.id === id
+    );
+
 
     if (folder) {
 
-        path.push(folder);
+
+        selectedParent = folder;
+
 
         if (folder.children.length > 0) {
+
 
             history.pushState(
                 {
@@ -97,50 +114,97 @@ folderTree.addEventListener("click", function(event) {
                 ""
             );
 
+
             showFolders(
                 folder.children,
                 folder.name,
                 folder.id
             );
+
         }
+
     }
+
+
 });
+
+}
+
+
+
+// + Menü
 
 const newButton = document.getElementById("newButton");
 const createMenu = document.getElementById("create-menu");
 
+
+if (newButton) {
+
+
 newButton.addEventListener("click", function() {
 
+
     createMenu.innerHTML = `
+
         <div class="create-window">
+
             <h3>Was möchtest du erstellen?</h3>
-            <a href="ordner.html" class="create-button">📁 Ordner</a>
-            <a href="artikel.html" class="create-button">📄 Eintrag</a>
+
+            <a href="ordner.html" class="create-button">
+                📁 Ordner
+            </a>
+
+            <a href="artikel.html" class="create-button">
+                📄 Eintrag
+            </a>
+
         </div>
+
     `;
 
+
 });
+
+
+}
+
+
 
 document.addEventListener("click", function(event) {
 
-    if (!createMenu.contains(event.target) && event.target !== newButton) {
+
+    if (
+        createMenu &&
+        !createMenu.contains(event.target) &&
+        event.target !== newButton
+    ) {
+
         createMenu.innerHTML = "";
+
     }
+
 
 });
 
+
+
+
+// Zurück Button
+
 window.addEventListener("popstate", function(event) {
+
 
     if (event.state) {
 
-        path.pop();
 
         const parent = findParent(
             folders,
             event.state.folderId
         );
 
+
         if (parent) {
+
 
             showFolders(
                 parent.children,
@@ -148,60 +212,99 @@ window.addEventListener("popstate", function(event) {
                 parent.id
             );
 
-        } else {
+
+        }
+
+
+        else {
+
 
             showFolders(
                 folders,
                 ""
             );
 
-        }
-    } else {
 
-        path = [];
+        }
+
+
+    }
+
+    else {
+
 
         showFolders(
             folders,
             ""
         );
+
+
     }
+
+
 });
 
-const nameStep = document.getElementById("nameStep");
-const pathStep = document.getElementById("pathStep");
-const backPathButton = document.getElementById("backPathButton");
 
 
 
-if (backPathButton) {
 
-    backPathButton.addEventListener("click", () => {
+// Ordner erstellen
 
-        if (path.length > 0) {
+const createFolderButton =
+document.getElementById("createFolderButton");
 
-            path.pop();
 
-            if (path.length === 0) {
+if (createFolderButton) {
 
-                showFolders(
-                    folders,
-                    ""
-                );
 
-            } else {
+createFolderButton.addEventListener("click", function() {
 
-                const parentFolder = path[path.length - 1];
 
-                showFolders(
-                    parentFolder.children,
-                    parentFolder.name,
-                    parentFolder.id
-                );
+    const input =
+    document.getElementById("NewfolderName");
 
-            }
 
-        }
+    const folderName =
+    input.value.trim();
 
-    });
 
+
+    if (!folderName) {
+
+        alert("Bitte einen Ordnernamen eingeben.");
+        return;
+
+    }
+
+
+
+    const newFolder = {
+
+        id: Date.now(),
+
+        name: folderName,
+
+        children: []
+
+    };
+    if (selectedParent) {
+        selectedParent.children.push(
+            newFolder
+        );
+    }
+
+    else {
+        folders.push(
+            newFolder
+        );
+    }
+
+    alert("Ordner erstellt!");
+
+    showFolders(
+        folders,
+        ""
+    );
+});
 }
+loadFolders();
