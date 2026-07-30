@@ -179,6 +179,7 @@ const nameStep = document.getElementById("nameStep");
 const pathStep = document.getElementById("pathStep");
 const nextButton = document.getElementById("nextButton");
 const folderNameInput = document.getElementbyId("NewfolderName");
+const backPathButton = document.getElementById("backPathButton");
 
 nextButton.addEventListener("click", () => {
     const folderName = folderNameInput.value;
@@ -196,8 +197,20 @@ folderList.forEach(folder => {
     folderButton.textContent = "📁 " + folder.name;
 
     folderButton.addEventListener("click", () => {
+        path.push(folder);
         showFolders(folder.children);
     });
 
     folderExplorer.appendChild(folderButton);
 });
+
+backPathButton.addEventListener("click", () => {
+    path.pop();
+    showcurrentPath();
+})
+
+function showCurrentPath() {
+    if(path.length === 0){
+        showFolders(folders);
+    }
+}
