@@ -169,27 +169,8 @@ window.addEventListener("popstate", function(event) {
 
 const nameStep = document.getElementById("nameStep");
 const pathStep = document.getElementById("pathStep");
-const nextButton = document.getElementById("nextButton");
-const folderNameInput = document.getElementById("NewfolderName");
 const backPathButton = document.getElementById("backPathButton");
 
-
-if (nextButton && folderNameInput) {
-
-    nextButton.addEventListener("click", () => {
-
-        const folderName = folderNameInput.value;
-
-        newFolderName = folderName;
-
-        nameStep.style.display = "none";
-        pathStep.style.display = "block";
-
-        path = [];
-        showFolders(folders);
-    });
-
-}
 
 
 if (backPathButton) {
