@@ -176,38 +176,32 @@ const backPathButton = document.getElementById("backPathButton");
 if (backPathButton) {
 
     backPathButton.addEventListener("click", () => {
-        history.back();
+
+        if (path.length > 0) {
+
+            path.pop();
+
+            if (path.length === 0) {
+
+                showFolders(
+                    folders,
+                    ""
+                );
+
+            } else {
+
+                const parentFolder = path[path.length - 1];
+
+                showFolders(
+                    parentFolder.children,
+                    parentFolder.name,
+                    parentFolder.id
+                );
+
+            }
+
+        }
+
     });
 
-}
-
-nextButton.addEventListener("click", () => {
-
-    const folderName = folderNameInput.value;
-
-    newFolderName = folderName;
-
-    nameStep.style.display = "none";
-    pathStep.style.display = "block";
-
-    path = [];
-    showFolders(folders);
-});
-
-backPathButton.addEventListener("click", () => {
-    history.back();
-});
-
-function showCurrentPath() {
-    if (path.length === 0) {
-        showFolders(folders);
-    } else {
-        const currentFolder = path[path.length - 1];
-
-        showFolders(
-            currentFolder.children,
-            currentFolder.name,
-            currentFolder.id
-        );
-    }
 }
