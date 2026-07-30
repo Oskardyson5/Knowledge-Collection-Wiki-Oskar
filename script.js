@@ -257,7 +257,7 @@ document.getElementById("createFolderButton");
 if (createFolderButton) {
 
 
-createFolderButton.addEventListener("click", function() {
+createFolderButton.addEventListener("click", async function() {
 
 
     const input =
@@ -300,11 +300,24 @@ createFolderButton.addEventListener("click", function() {
     }
 
     alert("Ordner erstellt!");
-
+    await saveFolders()
     showFolders(
         folders,
         ""
     );
 });
+}
+
+function saveFolders() {
+
+    console.log("Aktueller Ordnerbaum:");
+
+    console.log(
+        JSON.stringify(
+            folders,
+            null,
+            4
+        )
+    );
 }
 loadFolders();
