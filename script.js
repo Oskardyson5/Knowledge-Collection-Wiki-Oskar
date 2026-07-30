@@ -156,7 +156,6 @@ window.addEventListener("popstate", function(event) {
             );
 
         }
-
     } else {
 
         path = [];
@@ -165,9 +164,7 @@ window.addEventListener("popstate", function(event) {
             folders,
             ""
         );
-
     }
-
 });
 
 const nameStep = document.getElementById("nameStep");
@@ -186,25 +183,17 @@ nextButton.addEventListener("click", () => {
     pathStep.style.display = "block";
 
     path = [];
-
     showFolders(folders);
-
 });
 
 backPathButton.addEventListener("click", () => {
-
     history.back();
-
 });
 
 function showCurrentPath() {
-
     if (path.length === 0) {
-
         showFolders(folders);
-
     } else {
-
         const currentFolder = path[path.length - 1];
 
         showFolders(
@@ -212,7 +201,5 @@ function showCurrentPath() {
             currentFolder.name,
             currentFolder.id
         );
-
     }
-
 }
