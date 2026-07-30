@@ -1,4 +1,4 @@
-window.folders = [];
+let folders = [];
 
 const folderTitle = document.getElementById("folder-title");
 const folderTree = document.getElementById("folder-tree");
@@ -11,9 +11,8 @@ let selectedParent = null;
 async function loadFolders() {
 
     const response = await fetch("data/folders.json");
-
     folders = await response.json();
-
+    window.folders = folders;
     showFolders(folders, "");
 }
 
