@@ -2,28 +2,27 @@ const tokenInput = document.getElementById("tokenInput");
 const saveTokenButton = document.getElementById("saveTokenButton");
 
 
-saveTokenButton.addEventListener("click", function() {
+if (saveTokenButton) {
 
-    const token = tokenInput.value.trim();
+    saveTokenButton.addEventListener("click", function() {
 
-
-    if (!token) {
-
-        alert("Bitte Token eingeben.");
-
-        return;
-
-    }
+        const token = tokenInput.value.trim();
 
 
-    localStorage.setItem(
-        "githubToken",
-        token
-    );
+        if (!token) {
+            alert("Bitte Token eingeben.");
+            return;
+        }
 
 
-    alert("Token gespeichert!");
+        localStorage.setItem(
+            "githubToken",
+            token
+        );
 
-    tokenInput.value = "";
 
-});
+        alert("Token gespeichert!");
+
+    });
+
+}

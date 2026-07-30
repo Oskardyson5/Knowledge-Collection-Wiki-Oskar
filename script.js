@@ -1,4 +1,4 @@
-let folders = [];
+window.folders = [];
 
 const folderTitle = document.getElementById("folder-title");
 const folderTree = document.getElementById("folder-tree");
@@ -300,24 +300,10 @@ createFolderButton.addEventListener("click", async function() {
     }
 
     alert("Ordner erstellt!");
-    await saveFolders()
+    await saveFolders();
     showFolders(
         folders,
         ""
     );
 });
 }
-
-function saveFolders() {
-
-    console.log("Aktueller Ordnerbaum:");
-
-    console.log(
-        JSON.stringify(
-            folders,
-            null,
-            4
-        )
-    );
-}
-loadFolders();

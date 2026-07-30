@@ -1,5 +1,3 @@
-const SHA = getFileSha();
-
 function getToken(){
     const token = localStorage.getItem("githubToken");
     return token;
@@ -63,7 +61,7 @@ async function uploadFile(content, sha) {
 async function saveFolders() {
 
     const json = JSON.stringify(
-        folders,
+        window.folders,
         null,
         4
     );
